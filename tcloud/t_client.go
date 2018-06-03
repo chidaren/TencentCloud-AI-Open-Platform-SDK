@@ -20,7 +20,7 @@ type client struct {
 }
 
 func (client *client) genParams(paramStruct interface{}) []byte {
-	baseRequest := &request{client.AppID, time.Now().Unix(),GetRandString(10)}
+	baseRequest := &request{client.AppID, time.Now().Unix(), GetRandString(10)}
 
 	allParams := []interface{}{baseRequest, paramStruct}
 	paramsLen := len(allParams)
@@ -94,8 +94,8 @@ func (client *client) genParams(paramStruct interface{}) []byte {
 //	return []byte(reqParamsStr)
 //}
 
-func (client *client) sendRequest(data io.Reader, res interface{}) (err error) {
-	resp, err := httpClient.Post("https://api.ai.qq.com/fcgi-bin/ptu/ptu_facemerge", "application/x-www-form-urlencoded", data)
+func (client *client) sendRequest(urlStr string, data io.Reader, res interface{}) (err error) {
+	resp, err := httpClient.Post(urlStr, "application/x-www-form-urlencoded", data)
 	if err != nil {
 		err = fmt.Errorf("call.failed, err: %v", err)
 		return

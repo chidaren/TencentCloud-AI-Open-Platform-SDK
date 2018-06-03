@@ -2,7 +2,6 @@ package tcloud
 
 import (
 	"bytes"
-	"fmt"
 )
 
 type FilterResponse struct {
@@ -12,14 +11,13 @@ type FilterResponse struct {
 }
 
 type FilterRequest struct {
-	Filter int `json:"filter"`
+	Filter int    `json:"filter"`
 	Image  []byte `json:"image"`
 }
 
 func (client *client) Filter(req *FilterRequest) (res *FilterResponse, err error) {
 	params := client.genParams(req)
-	fmt.Println(string(params))
 	res = &FilterResponse{}
-	err = client.sendRequest(bytes.NewReader(params), res)
+	err = client.sendRequest("https://api.ai.qq.com/fcgi-bin/ptu/ptu_imgfilter", bytes.NewReader(params), res)
 	return
 }

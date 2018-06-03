@@ -8,7 +8,7 @@ import (
 )
 
 func TestClient_Filter(t *testing.T) {
-	client := NewClient(11, "xxx", 3, 9, 100, 60)
+	client := NewClient(11, "xx", 3, 9, 100, 60)
 	data, err := ioutil.ReadFile("../test_materials/face.jpg")
 	if err != nil {
 		t.Fatal(err)
@@ -29,5 +29,8 @@ func TestClient_Filter(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	ioutil.WriteFile("../test_materials/filter_output.jpg", d, os.ModePerm)
+	err = ioutil.WriteFile("../test_materials/filter_output.jpg", d, os.ModePerm)
+	if err != nil {
+		t.Fatal(err)
+	}
 }
