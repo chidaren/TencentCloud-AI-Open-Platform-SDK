@@ -1,4 +1,3 @@
-# tcloud-ai-sdk
 ####  EXAMPLE - Image Filter Effects
     client := tcloud.NewClient(appid, appkey, connTimeout, transportTimeout, maxCoonPerHost, maxIdleCoons)
     data, err := ioutil.ReadFile("example.jpg")
