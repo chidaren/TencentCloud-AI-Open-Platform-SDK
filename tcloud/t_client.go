@@ -55,44 +55,6 @@ func (client *client) genParams(paramStruct interface{}) []byte {
 	return []byte(reqParamsStr)
 }
 
-//func (client *client) genParams(paramStruct interface{}) []byte {
-//	params := paramStruct.(*struct {
-//		request
-//		FaceFusionRequest
-//	})
-//	params.NonceStr = model.GetRandString(10)
-//	params.Timestamp = time.Now().Unix()
-//
-//	paramsV := reflect.ValueOf(params).Elem()
-//	paramsLen := paramsV.NumField()
-//	paramsSlice := make([]string, 0, paramsLen+1)
-//
-//	for i := 0; i < paramsLen; i++ {
-//		t := paramsV.Field(i).NumField()
-//		for k := 0; k < t; k ++ {
-//			key := paramsV.Field(i).Type().Field(k).Tag.Get("json")
-//			value := ""
-//			switch paramsV.Field(i).Field(k).Kind() {
-//			case reflect.Int64, reflect.Int, reflect.Int32:
-//				value = strconv.FormatInt(paramsV.Field(i).Field(k).Int(), 10)
-//			case reflect.Slice:
-//				value = string(paramsV.Field(i).Field(k).Bytes())
-//			default:
-//				value = paramsV.Field(i).Field(k).String()
-//			}
-//			paramsSlice = append(paramsSlice, fmt.Sprintf("%s=%s", key, url.QueryEscape(value)))
-//		}
-//	}
-//	sortedParams := sort.StringSlice(paramsSlice)
-//	sortedParams.Sort()
-//	sortedParams = append(sortedParams, fmt.Sprintf("%s=%s", "app_key", client.key))
-//	reqParamsStr := strings.Join(sortedParams, "&")
-//
-//	sign := strings.ToUpper(model.MD5(reqParamsStr))
-//
-//	reqParamsStr += fmt.Sprintf("&%s=%s", "sign", sign)
-//	return []byte(reqParamsStr)
-//}
 
 func (client *client) sendRequest(urlStr string, data io.Reader, res interface{}) (err error) {
 	resp, err := httpClient.Post(urlStr, "application/x-www-form-urlencoded", data)
